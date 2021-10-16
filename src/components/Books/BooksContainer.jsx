@@ -2,11 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   getBooksBySearchThunkCreator,
-  getBooksThunkCreator,
   getMoreBooksBySearchThunkCreator,
-  nullifyStateThunkCreator,
-  setCurrentBookIDAC,
-  nullifyCurrentBookIDAC,
+  setCurrentBookIdAC,
+  nullifyCurrentBookIdAC,
 } from "../../redux/booksReducer";
 import Books from "./Books";
 import Preloader from "../common/Preloader/Preloader";
@@ -15,7 +13,13 @@ class BooksContainer extends React.Component {
   componentDidMount() {
     // getBooksApi('js', this.props.startIndex).then(
     //    response => this.props.setBooks(response.data.items))
-    this.props.getBooksBySearch("java", "Computers", "relevance", 0, 30);
+    this.props.getBooksBySearch(
+      "java",
+      "Computers",
+      "relevance",
+      0,
+      this.props.maxResults
+    );
   }
 
   render() {
@@ -32,7 +36,6 @@ class BooksContainer extends React.Component {
           startIndex={this.props.startIndex}
           maxResults={this.props.maxResults}
           currentBookID={this.props.currentBookID}
-          //  getBooks={this.props.getBooks}
           getBooksBySearch={this.props.getBooksBySearch}
           getMoreBooksBySearch={this.props.getMoreBooksBySearch}
           setCurrentBookID={this.props.setCurrentBookID}
@@ -59,10 +62,8 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  //   getBooks: getBooksThunkCreator,
-  // nullifyState: nullifyStateThunkCreator,
   getBooksBySearch: getBooksBySearchThunkCreator,
   getMoreBooksBySearch: getMoreBooksBySearchThunkCreator,
-  setCurrentBookID: setCurrentBookIDAC,
-  nullifyCurrentBookID: nullifyCurrentBookIDAC,
+  setCurrentBookID: setCurrentBookIdAC,
+  nullifyCurrentBookID: nullifyCurrentBookIdAC,
 })(BooksContainer);

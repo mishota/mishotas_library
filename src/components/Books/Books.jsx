@@ -30,30 +30,6 @@ let Books = ({
     );
   };
 
-  const ShowCurrentBook = ({ currentBookID, books, nullifyCurrentBookID }) => {
-    debugger;
-    //  let currentBook = books.map.get(currentBookID);
-    let currentBook = books.find((item) => item.id == currentBookID);
-    return (
-      <div className="info">
-        <div>{currentBook.id}</div>
-        <span>TITLE: {currentBook.volumeInfo.title}</span>
-        <p>AUTHORS:{currentBook.volumeInfo.authors}</p>
-        <p>CATEGORIES: {currentBook.volumeInfo.categories[0]}</p>
-        <p>LINK: {currentBook.volumeInfo.selfLink}</p>
-        {currentBook.volumeInfo.imageLinks.thumbnail ? (
-          <img
-            src={currentBook.volumeInfo.imageLinks.thumbnail}
-            className={styles.booksImage}
-          />
-        ) : (
-          "no image"
-        )}
-        <button onClick={nullifyCurrentBookID}>BACK</button>
-      </div>
-    );
-  };
-
   return (
     <div className={styles.books}>
       <div className={styles.container}>
@@ -78,9 +54,7 @@ let Books = ({
                     name="categoryField"
                     className={"form-control"}
                   >
-                    <option selected value="all">
-                      all
-                    </option>
+                    <option defaultValue="all">all</option>
                     <option value="art">art</option>
                     <option value="computers">computers</option>
                     <option value="history">history</option>

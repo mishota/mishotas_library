@@ -18,7 +18,7 @@ let Book = ({ book, setCurrentBookID }) => {
       </p>
       <p>
         CATEGORIES:{" "}
-        {book.volumeInfo.categories[0]
+        {book.volumeInfo.categories
           ? book.volumeInfo.categories[0]
           : "No categories"}
       </p>

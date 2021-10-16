@@ -5,7 +5,6 @@ const SET_NEW_BOOKS = "SET_NEW_BOOKS";
 const SET_START_INDEX = "SET_START_INDEX";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_TOTAL_BOOKS_COUNT = "SET_TOTAL_BOOKS_COUNT";
-// const NULLIFY_BOOKS = "NULLIFY_BOOKS";
 const NULLIFY_START_INDEX = "NULLIFY_START_INDEX";
 const SET_SEARCH_PARAMETER = "SET_SEARCH_PARAMETER";
 const SET_CATEGORY = "SET_CATEGORY";
@@ -13,19 +12,53 @@ const SET_SORT = "SET_SORT";
 const SET_CURRENT_BOOK = "SET_CURRENT_BOOK";
 const NULLIFY_CURRENT_BOOK = "NULLIFY_CURRENT_BOOK";
 
+export type ImageLinksType={
+  smallThumbnail: string
+  thumbnail: string
+}
+
+export type VolumeInfoType={
+  title: string
+  authors: Array<string>
+  publisher: string
+  publishedDate: string
+  pageCount: number
+  categories: Array<string>
+  imageLinks: ImageLinksType
+  language: string
+}
+
+export type BookType ={
+  id: string
+  volumeInfo: VolumeInfoType
+
+}
+
+export type InitialStateType={
+  books: Array<BookType>
+  searchParameter: string
+  category: string
+  sort: string
+  totalBooksCount: number
+  startIndex: number
+  maxResults: number
+  isFetching: boolean
+  currentBookID: string
+}
+
 let initialState = {
-  books: [],
+  books: [] as Array<BookType>,
   searchParameter: "",
   category: "all",
   sort: "relevance",
   totalBooksCount: 0,
   startIndex: 0,
-  maxResults: 30,
+  maxResults: 30 ,
   isFetching: false,
   currentBookID: "",
 };
 
-const booksReducer = (state = initialState, action) => {
+const booksReducer = (state: InitialStateType = initialState, action: any):InitialStateType => {
   switch (action.type) {
     case SET_BOOKS:
       return { ...state, books: [...state.books, ...action.books] };
@@ -34,7 +67,7 @@ const booksReducer = (state = initialState, action) => {
       return { ...state, books: action.books };
 
     case SET_START_INDEX:
-      let newStartIndex = state.startIndex + action.step;
+      let newStartIndex = state.startIndex + state.maxResults;
       return { ...state, startIndex: newStartIndex };
 
     case TOGGLE_IS_FETCHING:
@@ -79,130 +112,133 @@ const booksReducer = (state = initialState, action) => {
   }
 };
 
-export const setBooksAC = (books) => {
+type SetBooksACType={
+  type: typeof SET_BOOKS 
+  books: Array<BookType>
+}
+export const setBooksAC = (books: Array<BookType>): SetBooksACType => {
   return { type: SET_BOOKS, books };
 };
-export const setNewBooksAC = (books) => {
+type SetNewBooksACType={
+  type: typeof SET_NEW_BOOKS 
+  books: Array<BookType>
+}
+export const setNewBooksAC = (books: Array<BookType>):SetNewBooksACType => {
   return { type: SET_NEW_BOOKS, books };
 };
-export const setStartIndexAC = (step) => {
-  return { type: SET_START_INDEX, step };
+type SetStartIndexACType={
+  type: typeof SET_START_INDEX 
+}
+export const setStartIndexAC = ():SetStartIndexACType => {
+  return { type: SET_START_INDEX };
 };
-export const nullifyIndexAC = () => {
+type NullifyIndexACType={
+  type: typeof NULLIFY_START_INDEX 
+}
+export const nullifyIndexAC = ():NullifyIndexACType => {
   return { type: NULLIFY_START_INDEX };
 };
-
-export const toggleIsFetchingAC = (isFetching) => {
+type ToggleIsFetchingACType={
+  type: typeof TOGGLE_IS_FETCHING 
+  isFetching: boolean
+}
+export const toggleIsFetchingAC = (isFetching:boolean): ToggleIsFetchingACType => {
   return { type: TOGGLE_IS_FETCHING, isFetching };
 };
-
-export const setTotalBooksCountAC = (totalBooksCount) => {
+type SetTotalBooksCountACType={
+  type: typeof SET_TOTAL_BOOKS_COUNT 
+  count: number
+}
+export const setTotalBooksCountAC = (totalBooksCount: number): SetTotalBooksCountACType => {
   return { type: SET_TOTAL_BOOKS_COUNT, count: totalBooksCount };
 };
-export const setSearchParameterAC = (searchParameter) => {
+type SetSearchParameterACType={
+  type: typeof SET_SEARCH_PARAMETER 
+  searchParameter: string
+}
+export const setSearchParameterAC = (searchParameter: string): SetSearchParameterACType => {
   return { type: SET_SEARCH_PARAMETER, searchParameter };
 };
-export const setCategoryAC = (category) => {
+type SetCategoryACType={
+  type: typeof SET_CATEGORY 
+  category: string
+}
+export const setCategoryAC = (category: string): SetCategoryACType => {
   return { type: SET_CATEGORY, category };
 };
-export const setSortAC = (sort) => {
+type SetSortACType={
+  type: typeof SET_SORT 
+  sort: string
+}
+export const setSortAC = (sort: string):SetSortACType => {
   return { type: SET_SORT, sort };
 };
-export const setCurrentBookIDAC = (currentBookID) => {
+type SetCurrentBookIdACType={
+  type: typeof SET_CURRENT_BOOK 
+  currentBookID: string
+}
+export const setCurrentBookIdAC = (currentBookID: string): SetCurrentBookIdACType => {
   return { type: SET_CURRENT_BOOK, currentBookID };
 };
-export const nullifyCurrentBookIDAC = () => {
+type NullifyCurrentBookIdACType={
+  type: typeof NULLIFY_CURRENT_BOOK 
+}
+export const nullifyCurrentBookIdAC = (): NullifyCurrentBookIdACType => {
   return { type: NULLIFY_CURRENT_BOOK };
 };
 
-export const getBooksThunkCreator = (
-  searchParameter,
-  category,
-  sort,
-  startIndex,
-  maxResults
+export const getBooksBySearchThunkCreator = (//thunk creator requestBooks
+  searchParameter: string,
+  category: string,
+  sort: string,
+  startIndex: number,
+  maxResults: number
 ) => {
-  //thunk creator requestBooks
-
-  return async (dispatch) => {
-    //thunk
-    dispatch(toggleIsFetchingAC(true));
-    dispatch(setStartIndexAC(30));
-    let response = await getBooksApi(
-      searchParameter,
-      category,
-      sort,
-      startIndex,
-      maxResults
-    );
-    dispatch(toggleIsFetchingAC(false));
-    dispatch(setBooksAC(response.data.items));
-    dispatch(setTotalBooksCountAC(response.data.totalItems));
-  };
-};
-
-export const getBooksBySearchThunkCreator = (
-  searchParameter,
-  category,
-  sort,
-  startIndex,
-  maxResults
-) => {
-  //thunk creator requestBooks
-  debugger;
-  return async (dispatch) => {
+    return async (dispatch: any) => {
     //thunk
     dispatch(toggleIsFetchingAC(true));
     dispatch(setSearchParameterAC(searchParameter));
     dispatch(setCategoryAC(category));
     dispatch(setSortAC(sort));
     dispatch(nullifyIndexAC());
-    let response = await getBooksApi(
+    let response:any = await getBooksApi(
       searchParameter,
       category,
       sort,
       0,
       maxResults
     );
-    dispatch(setStartIndexAC(30));
+    dispatch(setStartIndexAC());
     dispatch(toggleIsFetchingAC(false));
     dispatch(setNewBooksAC(response.data.items));
     dispatch(setTotalBooksCountAC(response.data.totalItems));
   };
 };
 
-export const getMoreBooksBySearchThunkCreator = (
-  searchParameter,
-  category,
-  sort,
-  startIndex,
-  maxResults
+export const getMoreBooksBySearchThunkCreator = ( //thunk creator requestBooks
+  searchParameter: string,
+  category: string,
+  sort: string,
+  startIndex: number,
+  maxResults: number
 ) => {
-  //thunk creator requestBooks
-  debugger;
-  return async (dispatch) => {
-    //thunk
+    debugger;
+  return async (dispatch:any) => { //thunk
+   
     dispatch(toggleIsFetchingAC(true));
-    let response = await getBooksApi(
+    let response:any = await getBooksApi(
       searchParameter,
       category,
       sort,
       startIndex,
       maxResults
     );
-    dispatch(setStartIndexAC(30));
+    dispatch(setStartIndexAC());
     dispatch(toggleIsFetchingAC(false));
     dispatch(setBooksAC(response.data.items));
     dispatch(setTotalBooksCountAC(response.data.totalItems));
   };
 };
 
-// export const nullifyStateThunkCreator = () => {   //thunk creator requestBooks
-
-//    return (dispatch) => { //thunk
-//       dispatch(nullifyIndexAC());
-//       dispatch(setBooksAC([]));
-//    }
-// }
 
 export default booksReducer;
