@@ -5,7 +5,7 @@ import { Form, Field } from "react-final-form";
 import BooksProfile from "./BooksProfile";
 import { BookType } from "../../redux/booksReducer";
 
-type PropsType={
+type BooksPropType={
   books: Array<BookType>
   totalBooksCount: number
   searchParameter: string
@@ -22,7 +22,7 @@ type PropsType={
   nullifyCurrentBookID: ()=>void
 }
 
-let Books: React.FC<PropsType> = ({
+let Books: React.FC<BooksPropType> = ({
   books,
   totalBooksCount,
   searchParameter,

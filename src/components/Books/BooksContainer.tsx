@@ -5,11 +5,31 @@ import {
   getMoreBooksBySearchThunkCreator,
   setCurrentBookIdAC,
   nullifyCurrentBookIdAC,
+  BookType,
 } from "../../redux/booksReducer";
 import Books from "./Books";
 import Preloader from "../common/Preloader/Preloader";
+import { AppStateType } from "../../redux/reduxStore";
 
-class BooksContainer extends React.Component {
+type PropType={
+    maxResults: number
+    isFetching: boolean
+    books: Array<BookType>
+    totalBooksCount: number
+    searchParameter: string
+    category: string 
+    sort: string
+    startIndex: number
+    currentBookID: string
+    getBooksBySearch: (searchParameter: string, category: string, sort: string,
+    startIndex: number, maxResults: number)=>void
+    getMoreBooksBySearch: (searchParameter: string, category: string, sort: string,
+    startIndex: number, maxResults: number)=>void
+    setCurrentBookID: (currentBookID: string)=>void
+    nullifyCurrentBookID: ()=>void
+}
+
+class BooksContainer extends React.Component<PropType> {
   componentDidMount() {
     // getBooksApi('js', this.props.startIndex).then(
     //    response => this.props.setBooks(response.data.items))
@@ -46,12 +66,11 @@ class BooksContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     books: state.booksPage.books,
     totalBooksCount: state.booksPage.totalBooksCount,
     isFetching: state.booksPage.isFetching,
-
     searchParameter: state.booksPage.searchParameter,
     category: state.booksPage.category,
     sort: state.booksPage.sort,

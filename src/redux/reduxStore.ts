@@ -7,10 +7,12 @@ let rootReducer = combineReducers({
    booksPage: booksReducer,
 
 });
-
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>;
 let store = createStore(
    rootReducer, applyMiddleware(thunkMiddleWare),
 );
+//@ts-ignore
 global.store = store;
 
 export default store;
