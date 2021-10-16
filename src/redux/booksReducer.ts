@@ -31,7 +31,7 @@ export type VolumeInfoType={
 export type BookType ={
   id: string
   volumeInfo: VolumeInfoType
-
+ 
 }
 
 export type InitialStateType={

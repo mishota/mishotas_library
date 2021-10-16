@@ -1,7 +1,14 @@
 import React from "react";
+import { BookType } from "../../redux/booksReducer";
 import styles from "./Books.module.css";
 
-let Book = ({ book, setCurrentBookID }) => {
+type PropsType={
+  book: BookType
+  setCurrentBookID: (currentBookID: string)=>void
+  className?: string
+  // currentBookID: string
+}
+let Book: React.FC<PropsType> = ({ book, setCurrentBookID }) => {
   return (
     <div className={styles.card}>
       {/* <span>{book.id}</span> */}
@@ -22,10 +29,7 @@ let Book = ({ book, setCurrentBookID }) => {
           ? book.volumeInfo.categories[0]
           : "No categories"}
       </p>
-      <p>
-        LINK: {book.volumeInfo.selfLink ? book.volumeInfo.selfLink : "No link"}
-      </p>
-      {/* <NavLink to={"/" + book.id}> */}
+            {/* <NavLink to={"/" + book.id}> */}
       {book.volumeInfo.imageLinks.thumbnail ? (
         <img
           onClick={() => {

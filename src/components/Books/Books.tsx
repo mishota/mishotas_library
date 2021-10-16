@@ -3,8 +3,26 @@ import Book from "./Book";
 import styles from "./Books.module.css";
 import { Form, Field } from "react-final-form";
 import BooksProfile from "./BooksProfile";
+import { BookType } from "../../redux/booksReducer";
 
-let Books = ({
+type PropsType={
+  books: Array<BookType>
+  totalBooksCount: number
+  searchParameter: string
+  category: string 
+  sort: string
+  startIndex: number
+  maxResults: number
+  currentBookID: string
+  getBooksBySearch: (searchParameter: string, category: string, sort: string,
+  startIndex: number, maxResults: number)=>void
+  getMoreBooksBySearch: (searchParameter: string, category: string, sort: string,
+    startIndex: number, maxResults: number)=>void
+  setCurrentBookID: (currentBookID: string)=>void
+  nullifyCurrentBookID: ()=>void
+}
+
+let Books: React.FC<PropsType> = ({
   books,
   totalBooksCount,
   searchParameter,
@@ -13,13 +31,12 @@ let Books = ({
   startIndex,
   maxResults,
   currentBookID,
-  //   getBooks,
   getBooksBySearch,
   getMoreBooksBySearch,
   setCurrentBookID,
   nullifyCurrentBookID,
 }) => {
-  const onSearchSubmit = (formData) => {
+  const onSearchSubmit = (formData:any) => {
     // window.alert(formData.searchParameter + formData.category + formData.sort);
     getBooksBySearch(
       formData.searchParameterField,
@@ -82,10 +99,10 @@ let Books = ({
             <div className={styles.row}>
               {books.map((b) => (
                 <Book
-                  className={styles.card}
-                  key={b.id}
+                  className ={styles.card}
+                  // key={b.id}
                   book={b}
-                  currentBookID={currentBookID}
+                  // currentBookID={currentBookID}
                   setCurrentBookID={setCurrentBookID}
                 />
               ))}
