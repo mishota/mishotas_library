@@ -4,6 +4,7 @@
   padding: 0;
   font-family: sans-serif;
 }
+
 .container {
   width: 100%;
   max-width: 1000px;
@@ -13,41 +14,21 @@
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
-
-  /* padding-left: var(--bs-gutter-x,.75rem);
-   padding-right: var(--bs-gutter-x,.75rem); */
 }
+
 .span {
   margin: auto;
   font-size: 17px;
 }
 
-/* .row {
-   flex: 0 0 auto;
-   width: 33.3333333333%;
-}  */
 .card {
-  /* width: 100%; */
-  /* max-width: 318px; */
-  /* padding: 20px; */
-  /* background-color: rgb(5, 28, 70); */
   color: rgb(112, 24, 58);
-  /* margin: 10px 0; */
   display: inline-block;
   flex-direction: column;
   height: 100px;
   display: inline-block;
   width: 30%;
   background-clip: border-box;
-  /* position: relative;
-   display: flex;
-   flex-direction: column;
-   min-width: 0;
-   word-wrap: break-word;
-   background-color: rgb(58, 89, 155);
-   background-clip: border-box;
-   border: 1px solid rgba(0,0,0,.125);
-   border-radius: .25rem; */
 }
 
 .header {
@@ -70,4 +51,25 @@
   margin-bottom: 10px;
   background: rgb(84, 129, 39);
   border: none;
+}
+
+.profile {
+  margin: 0 auto;
+  display: grid;
+  width: 100%;
+  grid-template-areas:
+    "i p"
+    "b b";
+  grid-template-columns: 10fr 10fr;
+  grid-gap: 10px;
+}
+
+.profileInfo {
+  grid-area: p;
+}
+.imageProfile {
+  grid-area: i;
+}
+.buttonProfile {
+  grid-area: b;
 }

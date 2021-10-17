@@ -31,8 +31,6 @@ type PropType={
 
 class BooksContainer extends React.Component<PropType> {
   componentDidMount() {
-    // getBooksApi('js', this.props.startIndex).then(
-    //    response => this.props.setBooks(response.data.items))
     this.props.getBooksBySearch(
       "java",
       "Computers",

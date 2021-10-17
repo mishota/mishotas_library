@@ -13,20 +13,18 @@ let Book: React.FC<PropsType> = ({ book, setCurrentBookID }) => {
     <div className={styles.card}>
       <div className={styles.id}>
         <span>
-          TITLE: {book.volumeInfo.title ? book.volumeInfo.title : "No Title"}
+          TITLE: {book.volumeInfo.title && book.volumeInfo.title} 
         </span>
       </div>
       <p>
         AUTHORS:
-        {book.volumeInfo.authors
-          ? book.volumeInfo.authors
-          : "No info about authors"}
+        {book.volumeInfo.authors && book.volumeInfo.authors}
       </p>
       <p>
         CATEGORIES:{" "}
         {book.volumeInfo.categories
           ? book.volumeInfo.categories[0]
-          : "No categories"}
+          : ""}
       </p>
             {/* <NavLink to={"/" + book.id}> */}
       {(book.volumeInfo.imageLinks&&book.volumeInfo.imageLinks.thumbnail) ? (
@@ -39,7 +37,7 @@ let Book: React.FC<PropsType> = ({ book, setCurrentBookID }) => {
           alt="BooksImage"
         />
       ) : (
-        "no image"
+        ""
       )}
       {/* </NavLink> */}
     </div>

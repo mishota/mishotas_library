@@ -101,7 +101,7 @@ let Books: React.FC<BooksPropType> = ({
               {books.map((b) => (
                 <Book
                   className ={styles.card}
-                  // key={b.id}
+                  key={b.id}
                   book={b}
                   // currentBookID={currentBookID}
                   setCurrentBookID={setCurrentBookID}
