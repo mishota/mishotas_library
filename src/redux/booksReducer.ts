@@ -1,3 +1,5 @@
+import { AppStateType } from './reduxStore';
+import { ThunkAction } from "redux-thunk";
 import { getBooksApi } from "../api/api";
 
 const SET_BOOKS = "SET_BOOKS";
@@ -58,7 +60,8 @@ let initialState = {
   currentBookID: "",
 };
 
-const booksReducer = (state: InitialStateType = initialState, action: any):InitialStateType => {
+
+const booksReducer = (state: InitialStateType = initialState, action: ActionCreatorType):InitialStateType => {
   switch (action.type) {
     case SET_BOOKS:
       return { ...state, books: [...state.books, ...action.books] };
@@ -111,6 +114,10 @@ const booksReducer = (state: InitialStateType = initialState, action: any):Initi
       return state;
   }
 };
+type ActionCreatorType = SetBooksACType | SetNewBooksACType | SetStartIndexACType | NullifyIndexACType | 
+ToggleIsFetchingACType | SetTotalBooksCountACType | SetSearchParameterACType | SetCategoryACType |
+ SetSortACType | SetCurrentBookIdACType | NullifyCurrentBookIdACType;
+
 
 type SetBooksACType={
   type: typeof SET_BOOKS 
@@ -193,8 +200,8 @@ export const getBooksBySearchThunkCreator = (//thunk creator requestBooks
   sort: string,
   startIndex: number,
   maxResults: number
-) => {
-    return async (dispatch: any) => {
+): ThunkAction<Promise<void>, AppStateType, unknown, ActionCreatorType> => {
+    return async (dispatch) => {
     //thunk
     dispatch(toggleIsFetchingAC(true));
     dispatch(setSearchParameterAC(searchParameter));
@@ -221,9 +228,9 @@ export const getMoreBooksBySearchThunkCreator = ( //thunk creator requestBooks
   sort: string,
   startIndex: number,
   maxResults: number
-) => {
+): ThunkAction<Promise<void>, AppStateType, unknown, ActionCreatorType> => {
     debugger;
-  return async (dispatch:any) => { //thunk
+  return async (dispatch) => { //thunk
    
     dispatch(toggleIsFetchingAC(true));
     let response:any = await getBooksApi(

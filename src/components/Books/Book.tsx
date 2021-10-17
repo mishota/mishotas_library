@@ -11,7 +11,6 @@ type PropsType={
 let Book: React.FC<PropsType> = ({ book, setCurrentBookID }) => {
   return (
     <div className={styles.card}>
-      {/* <span>{book.id}</span> */}
       <div className={styles.id}>
         <span>
           TITLE: {book.volumeInfo.title ? book.volumeInfo.title : "No Title"}
@@ -30,13 +29,14 @@ let Book: React.FC<PropsType> = ({ book, setCurrentBookID }) => {
           : "No categories"}
       </p>
             {/* <NavLink to={"/" + book.id}> */}
-      {book.volumeInfo.imageLinks.thumbnail ? (
+      {(book.volumeInfo.imageLinks&&book.volumeInfo.imageLinks.thumbnail) ? (
         <img
           onClick={() => {
             setCurrentBookID(book.id);
           }}
           src={book.volumeInfo.imageLinks.thumbnail}
           className={styles.booksImage}
+          alt="BooksImage"
         />
       ) : (
         "no image"

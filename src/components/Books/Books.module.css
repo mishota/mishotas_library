@@ -1,48 +1,45 @@
-.books{
-   box-sizing: border-box ;
-   margin: 0;
-   padding: 0;
-   font-family: sans-serif;
+.books {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
-.container{
-   width: 100%;
-   max-width: 1000px;
-   margin: 20 px auto;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content:space-between;
-   margin-left: auto;
-   margin-right: auto;
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20 px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
 
-   /* padding-left: var(--bs-gutter-x,.75rem);
+  /* padding-left: var(--bs-gutter-x,.75rem);
    padding-right: var(--bs-gutter-x,.75rem); */
-   
-   
 }
-.span{
-   margin: auto;
-   font-size: 17px;
-
-} 
+.span {
+  margin: auto;
+  font-size: 17px;
+}
 
 /* .row {
    flex: 0 0 auto;
    width: 33.3333333333%;
 }  */
 .card {
-   /* width: 100%; */
-   /* max-width: 318px; */
-   /* padding: 20px; */
-   /* background-color: rgb(5, 28, 70); */
-   color:rgb(112, 24, 58);
-   /* margin: 10px 0; */
-   display:inline-block;
-   flex-direction: column;
-   height: 100px;
-	display: inline-block;
-	width: 30%;
-   background-clip: border-box;
-   /* position: relative;
+  /* width: 100%; */
+  /* max-width: 318px; */
+  /* padding: 20px; */
+  /* background-color: rgb(5, 28, 70); */
+  color: rgb(112, 24, 58);
+  /* margin: 10px 0; */
+  display: inline-block;
+  flex-direction: column;
+  height: 100px;
+  display: inline-block;
+  width: 30%;
+  background-clip: border-box;
+  /* position: relative;
    display: flex;
    flex-direction: column;
    min-width: 0;
@@ -53,27 +50,24 @@
    border-radius: .25rem; */
 }
 
-.header{
-   width: 100%;
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   background: darkcyan;
-   padding: 16px 0;
-   font-size: larger;
-   border: none;
+.header {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-image: url(https://sun9-49.userapi.com/c855528/v855528346/1bd640/s5unmkscMOM.jpg);
+  padding: 16px 0;
+  font-size: larger;
+  border: none;
+}
 
-}
-.loadMore{
-   width: 100%;
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   background: darkcyan;
-   border: none;
-}
-.booksImage{
-   
+.loadMore {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: rgb(84, 129, 39);
+  border: none;
 }

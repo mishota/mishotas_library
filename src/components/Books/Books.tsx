@@ -51,6 +51,7 @@ let Books: React.FC<BooksPropType> = ({
     <div className={styles.books}>
       <div className={styles.container}>
         <div className={styles.header}>
+          <h1>FIND YOUR BOOK</h1>
           <Form
             // onSubmit={(formData) => { window.alert(formData.login) }}>
             onSubmit={onSearchSubmit}
@@ -92,7 +93,7 @@ let Books: React.FC<BooksPropType> = ({
               </form>
             )}
           </Form>
-          books will be here (total count={totalBooksCount})
+         We found {totalBooksCount} books for you!
         </div>
         {currentBookID === "" ? (
           <div>
@@ -125,7 +126,6 @@ let Books: React.FC<BooksPropType> = ({
           </div>
         ) : (
           <div>
-            <div>{currentBookID}</div>
             <div>
               <BooksProfile
                 currentBookID={currentBookID}

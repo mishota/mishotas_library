@@ -10,18 +10,23 @@ type PropType={
   const BooksProfile: React.FC<PropType> = ({ currentBookID, books, nullifyCurrentBookID }) => {
     debugger;
     //  let currentBook = books.map.get(currentBookID);
-    let currentBook: any  = books.find((item) => item.id === currentBookID);
+    let currentBook: BookType | undefined  = books.find((item) => item.id === currentBookID);
     if (currentBook){
     return (
       <div className="info">
-        <div>{currentBook.id}</div>
         <span>TITLE: {currentBook.volumeInfo.title}</span>
         <p>AUTHORS:{currentBook.volumeInfo.authors}</p>
-        <p>CATEGORIES: {currentBook.volumeInfo.categories[0]}</p>
+        <p>CATEGORIES: {currentBook.volumeInfo.categories}</p>
+        <p>PAGES: {currentBook.volumeInfo.pageCount}</p>
+        <p>LANGUAGE: {currentBook.volumeInfo.language}</p>
+        <p>PUBLISHER: {currentBook.volumeInfo.publisher}</p>
+        <p>PUBLISHER: {currentBook.volumeInfo.publisher}</p>
+        <p>PUBLISH DATE: {currentBook.volumeInfo.publishedDate}</p>
         {currentBook.volumeInfo.imageLinks.thumbnail ? (
           <img
             src={currentBook.volumeInfo.imageLinks.thumbnail}
             className={styles.booksImage}
+            alt="BooksImage"
           />
         ) : (
           "no image"
